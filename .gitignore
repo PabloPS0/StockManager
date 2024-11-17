@@ -1,0 +1,11 @@
+.env
+
+*.log
+
+*.pyc
+
+/pycache/*
+
+config/
+
+database/
