@@ -7,6 +7,7 @@
 - **Gerenciamento de Produtos**
 - **Relatórios de Estoque**
 - **Busca Eficiente**
+- **Interface de Login**
 
 ## Tecnologias Utilizadas
 - Python
@@ -24,7 +25,7 @@ cd StockManager
 ```
 3. Execute o aplicativo:
 ```
-python src/main.py
+python src/app.py
 ```
 
 ## Contribuições
