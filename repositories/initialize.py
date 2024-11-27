@@ -12,18 +12,13 @@ load_dotenv()
 
 # Obtém os caminhos do banco de dados das variáveis de ambiente
 DATABASE_PATH = os.getenv("DATABASE_PATH")
-DATABASE_PATH_USR = os.getenv("DATABASE_PATH_USR")
 
 # Define o diretório e caminho completo dos bancos de dados
 DB_FOLDER = os.path.dirname(DATABASE_PATH)
-DB_PATH = os.path.join(DB_FOLDER, "database_inv.db")
-
-DB_FOLDER_USR = os.path.dirname(DATABASE_PATH_USR)
-DB_PATH_USR = os.path.join(DB_FOLDER_USR, "database_usr.db")
+DB_PATH = os.path.join(DB_FOLDER, "database.db")
 
 # Cria os diretórios para os bancos de dados, caso não existam
 os.makedirs(os.path.dirname(DATABASE_PATH), exist_ok=True)
-os.makedirs(os.path.dirname(DATABASE_PATH_USR), exist_ok=True)
 
 def create_table(cursor, create_table_query, table_name):
     """
@@ -37,11 +32,11 @@ def create_table(cursor, create_table_query, table_name):
         print(f"Erro ao criar tabela '{table_name}': {e}")
 
 # Conectar-se aos bancos de dados
-conn_inv = sqlite3.connect(DB_PATH)
-cursor_inv = conn_inv.cursor()
+conn = sqlite3.connect(DB_PATH)
+cursor = conn.cursor()
 
-conn_usr = sqlite3.connect(DB_PATH_USR)
-cursor_usr = conn_usr.cursor()
+conn = sqlite3.connect(DB_PATH)
+cursor = conn.cursor()
 
 # Definindo as consultas de criação das tabelas
 create_users_table_query = '''
@@ -68,9 +63,8 @@ create_products_table_query = '''
 '''
 
 # Criando as tabelas
-create_table(cursor_usr, create_users_table_query, "users")
-create_table(cursor_inv, create_products_table_query, "products")
+create_table(cursor, create_users_table_query, "users")
+create_table(cursor, create_products_table_query, "products")
 
 # Fechando as conexões
-conn_usr.close()
-conn_inv.close()
+conn.close()
