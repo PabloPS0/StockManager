@@ -1,11 +1,12 @@
 import customtkinter as ctk
+from styles.window import Style
 
 class Menu(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Menu")
         self.protocol("WM_DELETE_WINDOW", self.close_window)
-        self.geometry("600x400+50+50")
+        self.geometry(Style.center_window(self, 3200, 2800))
         self.resizable(False, False)
         
         # Theme configuration
@@ -25,3 +26,7 @@ class Menu(ctk.CTk):
         # Bottom Frame (pode conter botões de ações)
         self.bottom_frame = ctk.CTkFrame(self)
         self.bottom_frame.pack(fill=ctk.X, pady=5, padx=5)
+
+    def close_window(self):
+        self.destroy()
+        self.quit()

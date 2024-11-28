@@ -1,11 +1,12 @@
 import customtkinter as ctk
+from styles.window import Style
 
 class Register(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Register")
         self.protocol("WM_DELETE_WINDOW", self.close_window)
-        self.geometry(self.center_window(3200, 2800))
+        self.geometry(Style.center_window(self, 3200, 2800))
         self.maxsize(3200, 2800)
         self.minsize(800, 600)
 
@@ -15,7 +16,7 @@ class Register(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
-        self.create_container
+        self.create_container()
         self.create_widgets()
 
     # Create the container
@@ -36,3 +37,7 @@ class Register(ctk.CTk):
     def create_widgets(self):
         name_app = ctk.CTkLabel(self.top_frame, text="Register", font=("Arial", 24))
         name_app.pack(pady=20, padx=10)
+
+    def close_window(self):
+        self.destroy()
+        self.quit()
