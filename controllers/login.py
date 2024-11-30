@@ -60,6 +60,12 @@ class Login(ctk.CTk):
         # Open register window
         pass
 
+    def back_to_lobby(self):
+        self.destroy()  # Fecha a janela de Login
+        from controllers.lobby import StockManager
+        StockManager()  # Reabre o Lobby
+    
+
     def close_window(self):
         self.destroy()
         self.quit()

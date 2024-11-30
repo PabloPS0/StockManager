@@ -38,6 +38,12 @@ class Register(ctk.CTk):
         name_app = ctk.CTkLabel(self.top_frame, text="Register", font=("Arial", 24))
         name_app.pack(pady=20, padx=10)
 
+    def back_to_lobby(self):
+        self.destroy()  # Fecha a janela de Login
+        from controllers.lobby import StockManager
+        StockManager()  # Reabre o Lobby
+
+
     def close_window(self):
         self.destroy()
         self.quit()
