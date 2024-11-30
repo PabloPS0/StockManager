@@ -47,10 +47,13 @@ class Login(ctk.CTk):
         entry_password.pack(pady=10, padx=10) 
 
         # Button
-        confirm_button = ctk.CTkButton(self.bottom_frame, text="Confirm", command=self.confirm)
+        confirm_button = ctk.CTkButton(self.mid_frame, text="Confirm", command=self.confirm)
         confirm_button.pack(pady=10)    
+        back_lobby = ctk.CTkButton(self.bottom_frame, text="Back to Lobby", command=self.back_to_lobby)
+        back_lobby.pack(pady=5, padx=10)
 
-        label_register = ctk.CTkButton(self.bottom_frame, text="Don't have an account? Register now", font=("Arial", 12), text_color="lightblue", fg_color="transparent", hover_color="#222222", command=self.open_register)
+        # Label
+        label_register = ctk.CTkButton(self.mid_frame, text="Don't have an account? Register now", font=("Arial", 12), text_color="lightblue", fg_color="transparent", hover_color="#222222", command=self.open_register)
         label_register.pack(pady=5, padx=10)
     def confirm(self):
         # Login logic 
@@ -63,7 +66,8 @@ class Login(ctk.CTk):
     def back_to_lobby(self):
         self.destroy()  # Fecha a janela de Login
         from controllers.lobby import StockManager
-        StockManager()  # Reabre o Lobby
+        open_lobby = StockManager()  
+        open_lobby.mainloop() # Reabre o Lobby
     
 
     def close_window(self):

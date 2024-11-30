@@ -4,25 +4,10 @@ import traceback as tb
 import tkinter as tk
 import sys
 
-# Manipular exceções silenciosas
-def silent_tkinter_error_handler(type, value, traceback):
-    # Manipulador para ignorar erros irrelevantes do Tkinter
-    if issubclass(type, tk.TclError):
-        return  # Ignora erros do Tkinter (como eventos em widgets destruídos)
-    if issubclass(type, KeyboardInterrupt) or issubclass(type, SystemExit):
-        return  # Ignora interrupções ou saídas
-    print(f"Erro inesperado: {value}")
-    tb.print_exc()
-
-# Define o manipulador de exceções global
-sys.excepthook = silent_tkinter_error_handler
-
 class StockManager(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.current_window = None  # Rastreamento da janela atual
-        self.pending_events = []  # Lista para rastrear IDs de eventos agendados com `after`
-        print(self.pending_events)
 
         # Window Config
         self.geometry(Style.center_window(self, 3200, 2800))
@@ -67,7 +52,6 @@ class StockManager(ctk.CTk):
         register_button = ctk.CTkButton(self.mid_frame, text="Register", command=self.open_register)
         register_button.pack(pady=10, padx=10)
     
-
     def open_enter(self):
         self.open_window("login")
 
@@ -103,11 +87,6 @@ class StockManager(ctk.CTk):
             self.pending_events.clear() # Limpa a lista de eventos pendentes
         except Exception as e:
             print(f"Erro ao cancelar eventos pendentes: {e}")
-
-    def schedule_event(self, delay, func, *args):
-        """Agenda um evento e rastreia seu ID."""
-        event_id = self.after(delay, func, *args)
-        self.pending_events.append(event_id)  # Adiciona o ID do evento à lista
 
     def safe_destroy(self):
         # Cancela eventos pendentes antes de destruir a janela

@@ -37,11 +37,33 @@ class Register(ctk.CTk):
     def create_widgets(self):
         name_app = ctk.CTkLabel(self.top_frame, text="Register", font=("Arial", 24))
         name_app.pack(pady=20, padx=10)
+        
+        # Text Entries
+        entry_name = ctk.CTkEntry(self.mid_frame, placeholder_text="Name:", width=600)
+        entry_name.pack(pady=5, padx=10)
+        entry_email = ctk.CTkEntry(self.mid_frame, placeholder_text="Email:", width=600)
+        entry_email.pack(pady=10, padx=10)
+        entry_password = ctk.CTkEntry(self.mid_frame, placeholder_text="Password:", show="*", width=600)
+        entry_password.pack(pady=10, padx=10)
+
+        # Button
+        confirm_button = ctk.CTkButton(self.mid_frame, text="Confirm", command=self.open_confirm)    
+        confirm_button.pack(pady=10, padx=10)
+
+        back_lobby_button = ctk.CTkButton(self.bottom_frame, text="Back to Lobby", command=self.back_to_lobby)
+        back_lobby_button.pack(pady=10, padx=10)
+
+    def open_confirm(self):
+        self.destroy()
+        from controllers.login import Login
+        open_login = Login()
+        open_login.mainloop()
 
     def back_to_lobby(self):
-        self.destroy()  # Fecha a janela de Login
+        self.destroy()  # Fecha a janela de Register
         from controllers.lobby import StockManager
-        StockManager()  # Reabre o Lobby
+        open_lobby = StockManager()  
+        open_lobby.mainloop()  # Reabre o Lobby
 
 
     def close_window(self):
